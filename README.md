@@ -48,7 +48,7 @@ sudo apt -y install omxplayer git-core
 ### Setup auto mounting of usb stick
 ```
 sudo mkdir -p /mnt/usbdisk
-sudo echo \"/dev/sda1		/mnt/usbdisk	vfat	ro,nofail	0	0\" | sudo tee -a /etc/fstab
+sudo echo \"/dev/sda1  /mnt/usbdisk  vfat   ro,nofail  0	0\" | sudo tee -a /etc/fstab
 ```
 
 ### Create folder for videos in home directory
