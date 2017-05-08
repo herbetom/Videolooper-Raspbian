@@ -50,3 +50,10 @@ chmod uga+rwx startvideo.sh
 ###Expand your root partition if you want to
 `sudo raspi-config`
 * Select option: "1 Expand Filesystem"
+
+Errorhandling
+---------------
+If you get the following Error 'COMXAudio::Decode timeout' add the following to the file `/boot/config.txt`
+`gpu_mem=128`.
+This will give the GPU more memory.
+
