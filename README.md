@@ -8,7 +8,6 @@ There is a [videolooper](https://github.com/adafruit/pi_video_looper) written in
 The script will look for videos either in:
 * the `video` directory in the home directory of the pi user
 * a usb stick plugged in before startup (this will not be remounted if you pull it out and plug it back in)
----
 
 ## Installation
 Start with a [raspbian img (lite)](https://www.raspberrypi.org/downloads/raspbian/), install it on the pi, and follow the steps below to install the videolooper.
@@ -67,7 +66,6 @@ chmod uga+rwx /home/pi/videolooper-raspbian/startvideo_random.sh
 `echo \"/home/pi/startvideo_random.sh" | tee -a /home/pi/.bashrc`
 
 
----
 ## Errorhandling
 If you get the following Error 'COMXAudio::Decode timeout' add the following to the file `/boot/config.txt`
 `gpu_mem=128`.
