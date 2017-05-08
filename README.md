@@ -8,19 +8,42 @@ There is a [videolooper](https://github.com/adafruit/pi_video_looper) written in
 The script will look for videos either in:
 * the `video` directory in the home directory of the pi user
 * a usb stick plugged in before startup (this will not be remounted if you pull it out and plug it back in)
+---
 
-# Installation
+## Installation
+Start with a [raspbian img (lite)](https://www.raspberrypi.org/downloads/raspbian/), install it on the pi, and follow the steps below to install the videolooper.
 
-## Grab 'n Go
-Copy the [prebuilt img](http://timschwartz.org/downloads/2016-05-10-raspbian-jessie-lite-video-looper.img.zip) to a micro SD card using [these instructions](https://www.raspberrypi.org/documentation/installation/installing-images/). The img was setup using the steps below and `2016-05-10-raspbian-jessie-lite` was used as the base raspbian image.
+### Modify the "config.txt"
+Insert or update the following parameters in the `/boot/config.txt` 
+```
+disable_overscan=1
+hdmi_force_hotplug=1
+disable_splash=1
+gpu_mem=128
+```
+### Make some changes via `sudo raspi-config`
+* Select option: "3 Boot Options"
+* Select option: "B1 Desktop / CLI"
+* Select option: "B2 Console Autologin"
+* Select option: "3 Boot Options"
+* Select option: "B2 Wait for Network at Boot"
+* Select option: "No"
+* Select option: "1 Expand Filesystem"
 
-## Roll Your Own
-Start with a [raspbian img](https://www.raspberrypi.org/downloads/raspbian/), install it on the pi, and follow the steps below to install the videolooper.
+> Also look at the "Localisation Options"
 
-### Install omxplayer
+### Disable RPi screen blanking in console
+If your screen goes black during command line after 30 minutes or so, you have screen blanking enabled most likely. If you want to turn it off:
+Edit the file `/etc/kbd/config` Change these lines:
+```
+BLANK_TIME=0
+BLANK_DPMS=off
+POWERDOWN_TIME=0
+```
+### Install needed packages (omxplayer, git)
 ```
 sudo apt-get update
-sudo apt-get -y install omxplayer
+sudo apt-get -y install omxplayer git-core
 ```
 
 ### Setup auto mounting of usb stick
@@ -32,27 +55,20 @@ sudo echo \"/dev/sda1		/mnt/usbdisk	vfat	ro,nofail	0	0\" | sudo tee -a /etc/fsta
 ### Create folder for videos in home directory
 `mkdir /home/pi/video`
 
-### Download startvideo.sh and put it in /home/pi/
+### Download the script
 ```
 cd /home/pi
-wget https://raw.githubusercontent.com/timatron/videolooper-raspbian/master/startvideo.sh
-chmod uga+rwx startvideo.sh
+git clone https://github.com/herbetom/videolooper-raspbian.git
+chmod uga+rwx /home/pi/videolooper-raspbian/startvideo.sh
+chmod uga+rwx /home/pi/videolooper-raspbian/startvideo_random.sh
 ```
 
-### Add startvideo.sh to .bashrc so it auto starts on login
-`echo \"/home/pi/startvideo.sh" | tee -a /home/pi/.bashrc`
+### Add startvideo_random.sh to .bashrc so it auto starts on login
+`echo \"/home/pi/startvideo_random.sh" | tee -a /home/pi/.bashrc`
 
-### Make system autoboot into pi user
-`sudo raspi-config`
-* Select option: "3 Boot Options"
-* Select option: "B2 Console Autologin"
 
-### Expand your root partition if you want to
-`sudo raspi-config`
-* Select option: "1 Expand Filesystem"
-
+---
 ## Errorhandling
 If you get the following Error 'COMXAudio::Decode timeout' add the following to the file `/boot/config.txt`
 `gpu_mem=128`.
 This will give the GPU more memory.
-
