@@ -2,6 +2,7 @@
 # Bash script by Tim Schwartz, http://www.timschwartz.org/raspberry-pi-video-looper/ 2013
 # Comments, clean up, improvements by Derek DeMoss, for Dark Horse Comics, Inc. 2015
 # Added USB support, full path, support files with spaces in names, support more file formats - Tim Schwartz, 2016
+for i in {0..5}; do echo -ne "Waiting: $i/5"'\r'; sleep 1; done; echo ""
 
 declare -A VIDS # make variable VIDS an Array
 
