@@ -3,6 +3,7 @@
 # Comments, clean up, improvements by Derek DeMoss, for Dark Horse Comics, Inc. 2015
 # Added USB support, full path, support files with spaces in names, support more file formats - Tim Schwartz, 2016
 
+clear
 for i in {0..5}; do echo -ne "Waiting: $i/5"'\r'; sleep 1; done; echo "" #Wait before beginn
 
 declare -A VIDS # make variable VIDS an Array
