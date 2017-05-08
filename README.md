@@ -41,8 +41,8 @@ POWERDOWN_TIME=0
 ```
 ### Install needed packages (omxplayer, git)
 ```
-sudo apt-get update
-sudo apt-get -y install omxplayer git-core
+sudo apt update
+sudo apt -y install omxplayer git-core
 ```
 
 ### Setup auto mounting of usb stick
@@ -58,8 +58,7 @@ sudo echo \"/dev/sda1		/mnt/usbdisk	vfat	ro,nofail	0	0\" | sudo tee -a /etc/fsta
 ```
 cd /home/pi
 git clone https://github.com/herbetom/videolooper-raspbian.git
-chmod uga+rwx /home/pi/videolooper-raspbian/startvideo.sh
-chmod uga+rwx /home/pi/videolooper-raspbian/startvideo_random.sh
+chmod uga+rwx videolooper-raspbian/startvideo.sh videolooper-raspbian/startvideo_random.sh
 ```
 
 ### Add startvideo_random.sh to .bashrc so it auto starts on login
