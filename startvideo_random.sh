@@ -53,7 +53,7 @@ else
 		done
 		
 	 	if [ -f ${VIDS[$PLAYING]} ]; then
-			echo "$PLAYING / $CURRENT - ${VIDS[$PLAYING]}"
+			echo "$[PLAYING+1] / $CURRENT - ${VIDS[$PLAYING]}"
 			#sleep 2
 			/usr/bin/omxplayer -r -b -o both ${VIDS[$PLAYING]} > /dev/null # Play video
 			
