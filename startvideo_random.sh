@@ -10,6 +10,7 @@ USB_FILES=/mnt/usbdisk/ # Variable for usb mount point
 CURRENT=0 # Number of videos in the folder
 SERVICE='omxplayer' # The program to play the videos
 PLAYING=0 # Video that is currently playing
+PLAYING_BEFORE=0 # Video that was playing before
 FILE_FORMATS='.mov|.mp4|.mpg'
 
 getvids () # Since I want this to run in a loop, it should be a function
@@ -36,22 +37,30 @@ fi
 while true; do
 if ps ax | grep -v grep | grep $SERVICE > /dev/null # Search for service, print to null
 then
-	echo 'running'
+	sleep 0
+	#echo 'running'
 else
 	getvids # Get a list of the current videos in the folder
 	if [ $CURRENT -gt 0 ] #only play videos if there are more than one video
 	then
-		let PLAYING+=1
-		if [ $PLAYING -ge $CURRENT ] # if PLAYING is greater than or equal to CURRENT
-		then
-			PLAYING=0 # Reset to 0 so we play the "first" video
-		fi
-
-	 	#echo ${VIDS[$PLAYING]}
+		let PLAYING_BEFORE=PLAYING
+		
+		while [ $PLAYING -eq $PLAYING_BEFORE ]
+		do
+			let PLAYING=$(($RANDOM % CURRENT)) #random order	
+		done
+		
 	 	if [ -f ${VIDS[$PLAYING]} ]; then
-			/usr/bin/omxplayer -r -b -o both ${VIDS[$PLAYING]} # Play video
+			echo "$PLAYING / $CURRENT - ${VIDS[$PLAYING]}"
+			sleep 2
+			/usr/bin/omxplayer -r -b -o both ${VIDS[$PLAYING]} > /dev/null # Play video
+			
+			
 		fi
 		# echo "Array size= $CURRENT" # error checking code
+		
+		
+		
 	else
 		echo "Insert USB with videos and restart or add videos to /home/pi/video and run ./startvideo.sh"
 		exit
