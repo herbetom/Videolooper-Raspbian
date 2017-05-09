@@ -1,5 +1,5 @@
 # Video Looper for Raspbian
-Automatically play and loop fullscreen videos on a Raspberry Pi 2 or 3.
+Automatically play and loop fullscreen videos on a Raspberry Pi (Tested on Pi 1, Pi Zero).
 
 This system uses a basic bash script to play videos with [omxplayer](http://elinux.org/Omxplayer), it simply checks if omxplayer isn't running and then starts it again. This simple method seems to work flawlessly for weeks on end without freezing or glitches. The only caveat of this method is that there are approximately 2-3 seconds of black between each video. If you are looking to do something with gapless looping on Raspberry Pi, try [Slooper](https://github.com/mokafolio/Slooper) by [Matthias Dörfelt](http://www.mokafolio.de/), though currently it needs a few updates to work without a remote (as of May 15, 2016).
 
