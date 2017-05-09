@@ -48,7 +48,11 @@ sudo apt -y install omxplayer git-core
 ### Setup auto mounting of usb stick
 ```
 sudo mkdir -p /mnt/usbdisk
-sudo echo \"/dev/sda1  /mnt/usbdisk  vfat   ro,nofail  0   0\" | sudo tee -a /etc/fstab
+```
+Choose one of the following lines. The diffrence is, that the first mounts the USB Drive Read Only. This will prevent the Drive from damage if it is removed wihout unmounting. The second mounts the USB Drive writable.
+```
+sudo echo "/dev/sda1  /mnt/usbdisk  auto  ro,nofail  0 0" | sudo tee -a /etc/fstab #read only
+sudo echo "/dev/sda1  /mnt/usbdisk  auto  user,umask=000,utf8,nofail  0 0" | sudo tee -a /etc/fstab #writable
 ```
 
 ### Create folder for videos in home directory
