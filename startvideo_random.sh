@@ -65,7 +65,7 @@ else
 		
 		
 	else
-		echo "Insert USB with videos and restart or add videos to /home/pi/video and run ./startvideo.sh"
+		echo "Insert USB with videos and restart or add videos to /home/pi/video or to the USB-Drive and then run ./startvideo_random.sh"
 		exit
 	fi
 fi
