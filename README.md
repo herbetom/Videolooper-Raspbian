@@ -66,7 +66,7 @@ chmod uga+rwx videolooper-raspbian/startvideo.sh videolooper-raspbian/startvideo
 ```
 
 ### Add startvideo_random.sh to .bashrc so it auto starts on login
-`echo \"/home/pi/startvideo_random.sh" | tee -a /home/pi/.bashrc`
+`echo \"/home/pi/videolooper-raspbian/startvideo_random.sh" | tee -a /home/pi/.bashrc`
 
 
 ## Errorhandling
